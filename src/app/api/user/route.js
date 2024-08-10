@@ -1,15 +1,18 @@
 import { DBConnect } from "@/libs/DBConnect";
 import { NextResponse } from "next/server";
-import { prisma } from "../../../../prisma";
-
+import { PrismaClient } from "@prisma/client";
 export async function POST(req, res) {
+  const prisma = new PrismaClient();
   try {
     await DBConnect();
-    
-    const { phone } = req.body;
+    console.log(req);
+    console.log("data in backend = ", await req.json());
 
-    const extUser = prisma.user.findUnique({
-      where: { phone },
+    const { phone } = await req.json();
+    const extUser = prisma.user.findFirst({
+      where: {
+        phone: phone,
+      },
     });
     if (extUser) {
       return NextResponse.json({ message: "User already exists" });
@@ -20,9 +23,12 @@ export async function POST(req, res) {
         phone,
       },
     });
-    
+
+    console.log("User created successfully", user);
+
     return NextResponse.json({ data: user });
   } catch (error) {
     console.log("Error in POST : ", error);
+    return NextResponse.json({ message: "Error in POST : " + error });
   }
 }
