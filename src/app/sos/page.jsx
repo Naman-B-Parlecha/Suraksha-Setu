@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
-const page = () => {
+const Sos = () => {
   const [location, setLocation] = useState(null);
   const [message, setMessage] = useState("");
   const queryClient = useQueryClient();
@@ -130,4 +130,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Sos;
