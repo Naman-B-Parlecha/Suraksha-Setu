@@ -2,8 +2,6 @@ import { DBConnect } from "@/libs/DBConnect";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-
-
 export async function POST(req) {
   const prisma = new PrismaClient();
   try {
@@ -24,7 +22,7 @@ export async function POST(req) {
     });
 
     if (extUser) {
-      return NextResponse.json(user);
+      return NextResponse.json(extUser); // Correctly return the found user
     }
 
     console.log("extUser", extUser);
@@ -32,13 +30,13 @@ export async function POST(req) {
     const user = await prisma.user.create({
       data: {
         phone,
-        profileImage: "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"
+        profileImage: "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png",
       },
     });
 
     console.log("User created successfully", user);
 
-    return NextResponse.json(user);
+    return NextResponse.json(user); // Return the newly created user
   } catch (error) {
     console.log("Error in POST:", error);
     return NextResponse.json({ message: "Error in POST: " + error });

@@ -22,6 +22,9 @@ const Settings = () => {
       const phone = localStorage.getItem("phone");
       const res = await axios.get(`/api/user/${phone}`);
       const data = res.data;
+      
+      localStorage.setItem("username",data.name);
+      localStorage.setItem("phone",data.phone);
 
       const settingsArray = Object.keys(data)
       .filter((key) => key !== "id") // Exclude the "id" key
@@ -45,7 +48,8 @@ const Settings = () => {
         acc[key] = setting.value;
         return acc;
       }, {});
-
+      localStorage.setItem("username",updatedData.name);
+      localStorage.setItem("phone",updatedData.phone);
       // Send the updated data back to the server
       const phone = localStorage.getItem("phone");
       const res = await axios.post(`/api/user/${phone}`, updatedData);
