@@ -91,12 +91,12 @@ const LoginModal = ({ onClose }) => {
        const res = await axios.post("/api/user", {
         phone: phoneNumber,
        });
-       localStorage.setItem("user", JSON.stringify(res.data));
        router.push("/user");
-      return res.data;
-    },
-    onSuccess: () => {
-      console.log("User created successfully");
+       return res.data;
+      },
+      onSuccess: () => {
+        console.log("User created successfully");
+        localStorage.setItem("user", JSON.stringify(res.data));
     },
     onError: () => {
       console.log("Error during user creation:", error);
