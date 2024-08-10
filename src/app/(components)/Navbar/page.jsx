@@ -6,6 +6,24 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
+  const [username, setUsername] = React.useState(null);
+  const [phone, setPhone] = React.useState(null);
+
+  React.useEffect(() => {
+    const handleStorageChange = () => {
+      const username = localStorage.getItem("username");
+      const phone = localStorage.getItem("phone");
+      setUsername(username);
+      setPhone(phone);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
   return (
     <div className="flex justify-between items-center w-full mb-7">
       {/* LEFT SIDE */}
@@ -32,7 +50,7 @@ const Navbar = () => {
               height={50}
               className="rounded-full h-full object-cover"
             />
-            <span className="font-semibold">Darshil</span>
+            <span className="font-semibold">{username??phone}</span>
           </div>
         </div>
         <Link href="/settings">

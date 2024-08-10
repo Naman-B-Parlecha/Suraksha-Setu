@@ -9,39 +9,53 @@ import {
   signInWithPhoneNumber,
 } from "firebase/auth";
 import { auth } from "../../firebase";
-import { prisma } from "../../prisma";
-import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+
+const useCreateUserMutation = (phoneNumber, onSuccessCallback) => {
+  return useMutation({
+    mutationFn: async () => {
+      const response = await axios.post("/api/user", { phone: phoneNumber });
+      return response.data; // Axios response is already parsed as JSON
+    },
+    onSuccess: (data) => {
+      console.log("User created successfully", data);
+      localStorage.setItem("uid", data.id);
+      localStorage.setItem("phone", phoneNumber);
+      if (onSuccessCallback) onSuccessCallback();
+    },
+    onError: (error) => {
+      console.error("Error during user creation:", error);
+    },
+  });
+};
 
 const LoginModal = ({ onClose }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(null);
   const [otpSent, setOtpSent] = useState(false);
-  const appVerifier = window.recaptchaVerifier;
-  const [isUserLogin, setIsUserLogin] = useState(false);
   const router = useRouter();
+
+  const { mutate: createUser } = useCreateUserMutation(phoneNumber, () => {
+    router.push("/user");
+    onClose();
+  });
+
   useEffect(() => {
     if (!otpSent) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: (response) => {
-            console.log("reCAPTCHA solved!");
-            // reCAPTCHA solved, allow OTP to be sent
-            // handleSendOtp();
-          },
-        }
-      );
+      window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha-container", {
+        size: "invisible",
+        callback: (response) => {
+          console.log("reCAPTCHA solved!");
+        },
+      });
     }
   }, [otpSent]);
 
   const handleSendOtp = async () => {
-    console.log("sending OTP to", phoneNumber);
-    signInWithPhoneNumber(auth, `+91${phoneNumber}`, appVerifier)
+    signInWithPhoneNumber(auth, `+91${phoneNumber}`, window.recaptchaVerifier)
       .then((confirmationResult) => {
         setConfirmationResult(confirmationResult);
         setOtpSent(true);
@@ -51,57 +65,21 @@ const LoginModal = ({ onClose }) => {
       });
   };
 
-  const handleOtpChange = (e) => {
-    e.preventDefault();
-    setOtp(e.target.value);
-  };
-
-  const handlePhoneChange = (e) => {
-    e.preventDefault();
-    setPhoneNumber(e.target.value);
-  };
-
   const handleOTPSubmit = async (e) => {
     e.preventDefault();
     if (!confirmationResult) return;
 
-    confirmationResult
-      .confirm(otp)
-      .then((result) => {
-        // User signed in successfully.
-        const user = result.user;
-        console.log("User signed in:", user);
-        // Handle user login success, like closing the modal
-        createUser(user);
+    try {
+      const result = await confirmationResult.confirm(otp);
+      const user = result.user;
+      console.log("User signed in:", user);
 
-        onClose();
-      })
-      .catch((error) => {
-        console.error("Error during OTP verification:", error);
-      });
+      // Trigger the mutation to create the user
+      createUser();
+    } catch (error) {
+      console.error("Error during OTP verification:", error);
+    }
   };
-
-  const {
-    mutate: createUser,
-    isSuccess,
-    isPending,
-  } = useMutation({
-    mutationFn: async (data) => {
-      // console.log("data", data.UserImp.phoneNumber);
-       const res = await axios.post("/api/user", {
-        phone: phoneNumber,
-       });
-       localStorage.setItem("phone",phoneNumber);
-       router.push("/user");
-       return res.data;
-      },
-      onSuccess: () => {
-        console.log("User created successfully");
-    },
-    onError: () => {
-      console.log("Error during user creation:", error);
-    },
-  });
 
   return (
     <>
@@ -131,7 +109,7 @@ const LoginModal = ({ onClose }) => {
                   id="phone"
                   className="px-4 py-2 pl-12 border border-gray-400 rounded w-full"
                   value={phoneNumber}
-                  onChange={handlePhoneChange}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
                   required
                 />
               </div>
@@ -143,7 +121,7 @@ const LoginModal = ({ onClose }) => {
                     className="px-4 py-2 h-12 border border-gray-400 rounded-xl w-full"
                     placeholder="Enter OTP"
                     value={otp}
-                    onChange={handleOtpChange}
+                    onChange={(e) => setOtp(e.target.value)}
                     required
                   />
                 </div>

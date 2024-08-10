@@ -2,27 +2,6 @@ import { DBConnect } from "@/libs/DBConnect";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-export async function PATCH(req) {
-  const prisma = new PrismaClient();
-  try {
-    await DBConnect();
-    const body = await req.json();
-    const { phone } = body;
-    // Use `await` to ensure the database operations are completed before proceeding
-    const user = await prisma.user.findFirst({
-      where: {
-        phone: phone,
-      },
-    });
-    return NextResponse.json(user);
-  } catch (error) {
-    console.log("Error in GET:", error);
-    return NextResponse.json({ message: "Error in GET: " + error });
-  } finally {
-    await prisma.$disconnect(); // Properly disconnect the Prisma client
-  }
-}
-
 export async function POST(req) {
   const prisma = new PrismaClient();
   try {
@@ -43,7 +22,7 @@ export async function POST(req) {
     });
 
     if (extUser) {
-      return NextResponse.json(user);
+      return NextResponse.json(extUser); // Correctly return the found user
     }
 
     console.log("extUser", extUser);
@@ -51,13 +30,13 @@ export async function POST(req) {
     const user = await prisma.user.create({
       data: {
         phone,
-        profileImage: "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"
+        profileImage: "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png",
       },
     });
 
     console.log("User created successfully", user);
 
-    return NextResponse.json(user);
+    return NextResponse.json(user); // Return the newly created user
   } catch (error) {
     console.log("Error in POST:", error);
     return NextResponse.json({ message: "Error in POST: " + error });

@@ -1,16 +1,20 @@
 "use client";
 
-import { Layout, LucideIcon, SlidersHorizontal } from "lucide-react";
+import { BookOpenText, Layout, LucideIcon, SlidersHorizontal, View } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 const SidebarLink = ({ href, icon: Icon, label, isCollapsed }) => {
   const pathname = usePathname();
   const isActive =
     pathname === href || (pathname === "/" && href === "/dashboard");
-
+    useEffect(()=>{
+      if (!localStorage.getItem("phone")) {
+        window.location.href = "/";
+      }
+    })
   return (
     <Link href={href}>
       <div
@@ -75,23 +79,22 @@ const Sidebar = () => {
           label="Dashboard"
           isCollapsed={isSidebarCollapsed}
         />
-
-        <SidebarLink
-          href="/user/setting"
-          icon={SlidersHorizontal}
-          label="Settings"
-          isCollapsed={isSidebarCollapsed}
-        />
         <SidebarLink
           href="/user/learn"
-          icon={SlidersHorizontal}
+          icon={BookOpenText}
           label="Learn"
           isCollapsed={isSidebarCollapsed}
         />
         <SidebarLink
           href="/user/blog"
-          icon={SlidersHorizontal}
+          icon={View}
           label="Blog"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/user/setting"
+          icon={SlidersHorizontal}
+          label="Settings"
           isCollapsed={isSidebarCollapsed}
         />
       </div>
