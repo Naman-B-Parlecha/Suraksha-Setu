@@ -25,7 +25,7 @@ const Sos = () => {
 
   const { mutate: sendSOS } = useMutation({
     mutationFn: async (message) => {
-      const response = await axios.post(`${domain}/api/sos`, message);
+      const response = await axios.post(`${domain}api/sos`, message);
 
       queryClient.refetchQueries({
         queryKey: ["fetchsos"],
