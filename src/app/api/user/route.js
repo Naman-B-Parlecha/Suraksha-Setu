@@ -22,7 +22,7 @@ export async function POST(req) {
     });
 
     if (extUser) {
-      return NextResponse.json({ message: "User already exists" });
+      return NextResponse.json(user);
     }
 
     console.log("extUser", extUser);
@@ -30,12 +30,13 @@ export async function POST(req) {
     const user = await prisma.user.create({
       data: {
         phone,
+        profileImage: "https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"
       },
     });
 
     console.log("User created successfully", user);
 
-    return NextResponse.json({ data: user });
+    return NextResponse.json(user);
   } catch (error) {
     console.log("Error in POST:", error);
     return NextResponse.json({ message: "Error in POST: " + error });
