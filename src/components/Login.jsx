@@ -12,6 +12,8 @@ import { auth } from "../../firebase";
 import { prisma } from "../../prisma";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
+
 const LoginModal = ({ onClose }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
@@ -19,7 +21,7 @@ const LoginModal = ({ onClose }) => {
   const [otpSent, setOtpSent] = useState(false);
   const appVerifier = window.recaptchaVerifier;
   const [isUserLogin, setIsUserLogin] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     if (!otpSent) {
       window.recaptchaVerifier = new RecaptchaVerifier(
@@ -89,6 +91,8 @@ const LoginModal = ({ onClose }) => {
        const res = await axios.post("/api/user", {
         phone: phoneNumber,
        });
+       localStorage.setItem("user", JSON.stringify(res.data));
+       router.push("/user");
       return res.data;
     },
     onSuccess: () => {
