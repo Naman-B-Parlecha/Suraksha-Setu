@@ -1,8 +1,12 @@
-"use client";
+
+import TableauViz from "@/analytics/Tableau";
 
 const Page = () => {
-  
-  return <>MAIN PAGE</>;
+  return (
+    <>
+      <TableauViz />
+    </>
+  );
 };
 
 export default Page;
