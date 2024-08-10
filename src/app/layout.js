@@ -1,8 +1,9 @@
-import { Inter } from "next/font/google";
+import { Inter, Quicksand } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import TanStackQuery, { TanStackQueryDevTools } from "@/tanstack/TanstackQuery";
 
-const inter = Inter({ subsets: ["latin"] });
+const quicksand = Quicksand({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -12,13 +13,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div className="p-5">
-          <Navbar />
-        </div>
+      <TanStackQuery>
+        <body className={quicksand.className}>
+          <div className="p-5">
+            <Navbar />
+          </div>
 
-        {children}
-      </body>
+          {children}
+        </body>
+        <TanStackQueryDevTools />
+      </TanStackQuery>
     </html>
   );
 }
