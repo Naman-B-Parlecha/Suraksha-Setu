@@ -1,6 +1,10 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
+import { MdOutlineCreate } from "react-icons/md";
+import CreatePostModal from "@/components/Modal";
 
 const blogPosts = [
   {
@@ -48,10 +52,42 @@ const blogPosts = [
     tags: ["Volunteering", "Crisis", "Community Support"],
   },
 ];
-
 const BlogPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/posts")
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, []);
+
+  const handleSavePost = async (newPost) => {
+    const response = await fetch("/api/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newPost),
+    });
+
+    if (response.ok) {
+      const savedPost = await response.json();
+      setPosts((prevPosts) => [...prevPosts, savedPost]);
+    }
+  };
+
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
+      <div className="w-full flex justify-end mb-6">
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="px-4 py-2 bg-black text-white font-bold rounded-md text-xl hover:bg-black/80 transition-all duration-300 ease-in-out flex flex-nowrap gap-2 justify-center items-center"
+        >
+          <MdOutlineCreate />
+          <p>Write Experience</p>
+        </button>
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {blogPosts.map((post) => (
           <Link
@@ -75,7 +111,9 @@ const BlogPage = () => {
               </h4>
               <p className="mt-3 text-xl text-gray-700">{post.description}</p>
               <div className="mt-4">
-                <p className="text-sm font-semibold text-gray-600">{post.location}</p>
+                <p className="text-sm font-semibold text-gray-600">
+                  {post.location}
+                </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {post.tags.map((tag, index) => (
                     <span
@@ -94,6 +132,11 @@ const BlogPage = () => {
           </Link>
         ))}
       </div>
+      <CreatePostModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSave={handleSavePost}
+      />
     </div>
   );
 };
