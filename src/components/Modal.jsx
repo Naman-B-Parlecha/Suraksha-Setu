@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 const CreatePostModal = ({ isOpen, onClose, onSave }) => {
   const [formData, setFormData] = useState({
@@ -26,6 +26,7 @@ const CreatePostModal = ({ isOpen, onClose, onSave }) => {
       alert("You can only add up to 3 tags.");
       return;
     }
+    console.log({ ...formData, tags: tagsArray });
     onSave({ ...formData, tags: tagsArray });
     onClose();
   };
@@ -62,7 +63,9 @@ const CreatePostModal = ({ isOpen, onClose, onSave }) => {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2">Image URL</label>
+          <label className="block text-gray-700 font-bold mb-2">
+            Image URL
+          </label>
           <input
             type="text"
             name="image"

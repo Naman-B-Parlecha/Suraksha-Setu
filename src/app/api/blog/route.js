@@ -29,6 +29,7 @@ export async function POST(request) {
         tags: data.tags,
         location: data.location,
         authorId: data.authorId,
+        image: data.image
       },
     });
     return new Response(JSON.stringify(newPost), {
