@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "../globals.css";
 import DashboardWrapper from "../DashboardWrapper";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Quicksand({ subsets: ["latin"] });
 
 export const metadata = {
   title: "User Dashboard",
