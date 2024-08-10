@@ -22,20 +22,20 @@ const NewsModal = ({ article }) => {
   const randomImage = images[Math.floor(Math.random() * images.length)];
 
   return (
-    <div className="max-w-2xl w-full lg:flex relative">
+    <div className="max-w-2xl w-full lg:flex relative ">
       <a href={url} target="_blank" rel="noreferrer">
         <button className="p-1 border-2 rounded-full absolute top-2 right-2">
           <MoveUpRight size={15}/>
         </button>
       </a>
       <div
-        className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+        className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-xl lg:rounded-r text-center overflow-hidden"
         style={{
           backgroundImage: `url(${randomImage})`,
         }}
         title="Woman holding a mug"
       ></div>
-      <div className="border-r border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div className="border-r rounded-xl border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white lg:rounded-l p-4 flex flex-col justify-between leading-normal">
         <div className="mb-8">
           <div className="text-black font-bold text-xl mb-2">{title}</div>
           <p className="text-grey-darker text-base">{description}</p>
