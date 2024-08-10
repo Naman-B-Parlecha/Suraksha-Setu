@@ -2,11 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { checkDomain } from "../../../domain/domain";
 
 const Sos = () => {
   const [location, setLocation] = useState(null);
   const [message, setMessage] = useState("");
   const queryClient = useQueryClient();
+
+  const domain = checkDomain();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +25,7 @@ const Sos = () => {
 
   const { mutate: sendSOS } = useMutation({
     mutationFn: async (message) => {
-      const response = await axios.post("/api/sos", message);
+      const response = await axios.post(`${domain}/api/sos`, message);
 
       queryClient.refetchQueries({
         queryKey: ["fetchsos"],
@@ -75,7 +78,7 @@ const Sos = () => {
         >
           <div className="mb-4">
             <label
-              for="sosMessage"
+              htmlForfor="sosMessage"
               className="block text-gray-700 font-bold mb-2"
             >
               Select an SOS message:
@@ -101,7 +104,7 @@ const Sos = () => {
 
           <div className="mb-4">
             <label
-              for="customMessage"
+              htmlForor="customMessage"
               className="block text-gray-700 font-bold mb-2"
             >
               Or enter a custom message:
