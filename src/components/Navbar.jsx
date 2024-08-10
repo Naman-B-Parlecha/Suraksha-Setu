@@ -6,14 +6,25 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import LoginModal from "./Login";
 
 const Navbar = () => {
   const [isLoggin, setIsLoggin] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-  const handleLogin = () => {};
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const router = useRouter();
+  
+  const handleLogin = () => {
+    setOpenModal(prev=>!prev);
+  };
+
   return (
     <div className="flex justify-between items-center w-full mb-7">
+      {
+        openModal && <LoginModal onClose={handleLogin}/>
+      }
       {/* LEFT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <div className="relative">
