@@ -11,9 +11,7 @@ const Navbar = () => {
   const [isLoggin, setIsLoggin] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  const handleLogin = () => {
-
-  };
+  const handleLogin = () => {};
   return (
     <div className="flex justify-between items-center w-full mb-7">
       {/* LEFT SIDE */}
