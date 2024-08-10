@@ -8,7 +8,7 @@ import Navbar from "./(components)/Navbar/page";
 const DashboardLayout = ({ children }) => {
   const isDarkMode = false;
   const isSidebarCollapsed = false;
-
+  
   return (
     <div
       className={`${

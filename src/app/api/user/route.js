@@ -2,26 +2,7 @@ import { DBConnect } from "@/libs/DBConnect";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
-export async function PATCH(req) {
-  const prisma = new PrismaClient();
-  try {
-    await DBConnect();
-    const body = await req.json();
-    const { phone } = body;
-    // Use `await` to ensure the database operations are completed before proceeding
-    const user = await prisma.user.findFirst({
-      where: {
-        phone: phone,
-      },
-    });
-    return NextResponse.json(user);
-  } catch (error) {
-    console.log("Error in GET:", error);
-    return NextResponse.json({ message: "Error in GET: " + error });
-  } finally {
-    await prisma.$disconnect(); // Properly disconnect the Prisma client
-  }
-}
+
 
 export async function POST(req) {
   const prisma = new PrismaClient();
