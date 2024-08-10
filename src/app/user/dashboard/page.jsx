@@ -1,7 +1,7 @@
-import React from "react";
+"use client";
 
-const page = () => {
-  return <div>User home page</div>;
+const Dashboard = () => {
+  return <div>Dashboard</div>;
 };
 
-export default page;
+export default Dashboard;
