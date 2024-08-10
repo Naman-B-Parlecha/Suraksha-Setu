@@ -5,14 +5,14 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 
 const Navbar = () => {
-  const [isLoggin, setIsLoggin] = React.useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState
+  const [isLoggin, setIsLoggin] = useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
   const handleLogin = () => {
-    
+
   };
   return (
     <div className="flex justify-between items-center w-full mb-7">
