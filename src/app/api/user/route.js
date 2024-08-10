@@ -5,10 +5,9 @@ export async function POST(req, res) {
   const prisma = new PrismaClient();
   try {
     await DBConnect();
-    console.log(req);
-    console.log("data in backend = ", await req.json());
-
     const { phone } = await req.json();
+
+    console.log("phone : ", phone);
     const extUser = prisma.user.findFirst({
       where: {
         phone: phone,
@@ -17,6 +16,8 @@ export async function POST(req, res) {
     if (extUser) {
       return NextResponse.json({ message: "User already exists" });
     }
+
+    console.log("Creating user with phone : ", phone);
 
     const user = prisma.user.create({
       data: {
