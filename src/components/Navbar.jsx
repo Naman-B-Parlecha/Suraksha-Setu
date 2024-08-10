@@ -44,16 +44,16 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      <div className="bg-slate-100 rounded-lg p-2 md:hidden mr-5">
-        <Link href="/sos" className="font-bold ">
+      <div className="bg-red-500 rounded-lg p-2 md:hidden mr-5">
+        <Link href="/sos" className="font-extrabold text-white">
           SOS
         </Link>
       </div>
       {/* RIGHT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <div className="hidden md:flex justify-between items-center gap-5">
-          <div className="bg-slate-100 rounded-lg p-2">
-            <Link href="/sos" className="font-bold ">
+          <div className="bg-red-500 rounded-lg p-2">
+            <Link href="/sos" className="font-extrabold text-white">
               SOS
             </Link>
           </div>
