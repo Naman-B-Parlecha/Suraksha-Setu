@@ -41,6 +41,7 @@ model Blog {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
   content   String
+  image     String
   tags      String[]
   location  String?
   author    User     @relation(fields: [authorId], references: [id])

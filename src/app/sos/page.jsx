@@ -32,6 +32,7 @@ const Sos = () => {
         type: "active",
       });
 
+    
       return response.data;
     },
 
@@ -104,7 +105,7 @@ const Sos = () => {
 
           <div className="mb-4">
             <label
-              htmlForor="customMessage"
+              htmlFor="customMessage"
               className="block text-gray-700 font-bold mb-2"
             >
               Or enter a custom message:

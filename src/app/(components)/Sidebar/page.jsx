@@ -1,6 +1,12 @@
 "use client";
 
-import { BookOpenText, Layout, LucideIcon, SlidersHorizontal, View } from "lucide-react";
+import {
+  BookOpenText,
+  Layout,
+  LucideIcon,
+  SlidersHorizontal,
+  View,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,11 +16,11 @@ const SidebarLink = ({ href, icon: Icon, label, isCollapsed }) => {
   const pathname = usePathname();
   const isActive =
     pathname === href || (pathname === "/" && href === "/dashboard");
-    useEffect(()=>{
-      if (!localStorage.getItem("phone")) {
-        window.location.href = "/";
-      }
-    })
+  useEffect(() => {
+    if (!localStorage.getItem("phone")) {
+      window.location.href = "/";
+    }
+  });
   return (
     <Link href={href}>
       <div
@@ -55,20 +61,16 @@ const Sidebar = () => {
           isSidebarCollapsed ? "px-5" : "px-8"
         }`}
       >
-        <Image
-          src="/logo.png"
-          alt="logo"
-          width={60}
-          height={60}
-          className="rounded-full"  
-        />
-        <h1
-          className={`${
-            isSidebarCollapsed ? "hidden" : "block"
-          } font-extrabold text-sm`}
-        >
-          Suraksha Setu
-        </h1>
+        <Link href="/user/dashboard">
+          <Image
+            src="/logo-color.png"
+            alt="logo"
+            width={200}
+            height={200}
+            className="rounded-full w-52 h-28 object-cover"
+          />
+        </Link>
+       
       </div>
 
       {/* LINKS */}

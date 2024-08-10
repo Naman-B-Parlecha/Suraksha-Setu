@@ -3,6 +3,7 @@
 import NewsModal from "@/components/NewsModal";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import TableauViz from "@/analytics/Tableau";
 
 const Page = () => {
   const [data,setData] = useState([]);
@@ -20,7 +21,7 @@ const Page = () => {
   return (
     <div className="flex h-full">
       <div className="w-1/2">
-        left
+      <TableauViz />
       </div>
       <div className="w-1/2">
         <h1 className="text-2xl font-bold">Recent News</h1>

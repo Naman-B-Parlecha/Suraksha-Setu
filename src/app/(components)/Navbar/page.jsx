@@ -53,7 +53,7 @@ const Navbar = () => {
             <span className="font-semibold">{username??phone}</span>
           </div>
         </div>
-        <Link href="/settings">
+        <Link href="/user/setting">
           <Settings className="cursor-pointer text-gray-500" size={24} />
         </Link>
       </div>
