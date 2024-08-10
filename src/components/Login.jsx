@@ -3,15 +3,22 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { TiTick } from "react-icons/ti";
 import { RxCross1 } from "react-icons/rx";
-import { getAuth, RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from "firebase/auth";
 import { auth } from "../../firebase";
-
+import { prisma } from "../../prisma";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 const LoginModal = ({ onClose }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOtp] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(null);
   const [otpSent, setOtpSent] = useState(false);
   const appVerifier = window.recaptchaVerifier;
+  const [isUserLogin, setIsUserLogin] = useState(false);
 
   useEffect(() => {
     if (!otpSent) {
@@ -63,12 +70,34 @@ const LoginModal = ({ onClose }) => {
         const user = result.user;
         console.log("User signed in:", user);
         // Handle user login success, like closing the modal
+        createUser(user);
+
         onClose();
       })
       .catch((error) => {
         console.error("Error during OTP verification:", error);
       });
   };
+
+  const {
+    mutate: createUser,
+    isSuccess,
+    isPending,
+  } = useMutation({
+    mutationFn: async (data) => {
+      // console.log("data", data.UserImp.phoneNumber);
+       const res = await axios.post("/api/user", {
+        phone: phoneNumber,
+       });
+      return res.data;
+    },
+    onSuccess: () => {
+      console.log("User created successfully");
+    },
+    onError: () => {
+      console.log("Error during user creation:", error);
+    },
+  });
 
   return (
     <>
