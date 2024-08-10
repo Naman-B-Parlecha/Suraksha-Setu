@@ -14,27 +14,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id               String         @id @default(auto()) @map("_id") @db.ObjectId
-  profileImage     String?
-  phone            String         @unique
-  name             String?
-  email            String?
-  address          String?
-  streetNumber     String?
-  city             String?
-  state            String?
-  zip              String?
-  emergencyContact String?
-  gender           String?
-  dob              String?
-  profession       String?
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  blog             Blog[]
-  quiz             Quiz[]
-  propertyLoss     PropertyLoss[]
-}
 
 model User {
   id               String  @id @default(auto()) @map("_id") @db.ObjectId
