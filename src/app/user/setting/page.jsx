@@ -1,20 +1,59 @@
 "use client";
 
 import Header from "@/app/(components)/Header/page";
-import React, { useState } from "react";
-
-const mockSettings = [
-  { label: "Username", value: "Darshil", type: "text" },
-  { label: "Email", value: "darshilmahraur3@gmail.com", type: "text" },
-];
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Settings = () => {
-  const [userSettings, setUserSettings] = useState(mockSettings);
+  const [userSettings, setUserSettings] = useState([]);
 
-  const handleToggleChange = (index) => {
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
+  const handleInputChange = (index, value) => {
     const settingsCopy = [...userSettings];
-    settingsCopy[index].value = !settingsCopy[index].value;
+    settingsCopy[index].value = value;
     setUserSettings(settingsCopy);
+  };
+
+  const getUserDetails = async () => {
+    try {
+      const phone = localStorage.getItem("phone");
+      const res = await axios.get(`/api/user/${phone}`);
+      const data = res.data;
+
+      const settingsArray = Object.keys(data)
+      .filter((key) => key !== "id") // Exclude the "id" key
+      .map((key) => ({
+        label: key.charAt(0).toUpperCase() + key.slice(1),
+        value: data[key] !== null ? data[key] : "",
+        type: "text",
+      }));
+
+      setUserSettings(settingsArray);
+    } catch (error) {
+      console.log("Error in fetching user details", error);
+    }
+  };
+
+  const updateUserDetails = async () => {
+    try {
+      // Construct the object to send back
+      const updatedData = userSettings.reduce((acc, setting) => {
+        const key = setting.label.charAt(0).toLowerCase() + setting.label.slice(1);
+        acc[key] = setting.value;
+        return acc;
+      }, {});
+
+      // Send the updated data back to the server
+      const phone = localStorage.getItem("phone");
+      const res = await axios.post(`/api/user/${phone}`, updatedData);
+      
+      console.log("Update successful", res.data);
+    } catch (error) {
+      console.log("Error in updating user details", error);
+    }
   };
 
   return (
@@ -30,6 +69,10 @@ const Settings = () => {
               <th className="text-left py-3 px-4 uppercase font-semibold text-sm">
                 Value
               </th>
+              <button  className="text-left py-3 px-4 uppercase font-semibold text-sm" onClick={updateUserDetails}>
+                Save
+              </button>
+
             </tr>
           </thead>
           <tbody>
@@ -37,39 +80,23 @@ const Settings = () => {
               <tr className="hover:bg-blue-50" key={setting.label}>
                 <td className="py-2 px-4">{setting.label}</td>
                 <td className="py-2 px-4">
-                  {setting.type === "toggle" ? (
-                    <label className="inline-flex relative items-center cursor-pointer">
-                      <input
-                        type="checkbox"
-                        className="sr-only peer"
-                        checked={setting.value}
-                        onChange={() => handleToggleChange(index)}
-                      />
-                      <div
-                        className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-blue-400 peer-focus:ring-4 
-                        transition peer-checked:after:translate-x-full peer-checked:after:border-white 
-                        after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white 
-                        after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all
-                        peer-checked:bg-blue-600"
-                      ></div>
-                    </label>
-                  ) : (
-                    <input
-                      type="text"
-                      className="px-4 py-2 border rounded-lg text-gray-500 focus:outline-none focus:border-blue-500"
-                      value={setting.value}
-                      onChange={(e) => {
-                        const settingsCopy = [...userSettings];
-                        settingsCopy[index].value = e.target.value;
-                        setUserSettings(settingsCopy);
-                      }}
-                    />
-                  )}
+                  <input
+                    type={setting.type}
+                    className="px-4 py-2 border rounded-lg text-gray-500 focus:outline-none focus:border-blue-500"
+                    value={setting.value}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                  />
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <button
+          className="mt-5 px-6 py-2 bg-blue-600 text-white rounded-lg"
+          onClick={updateUserDetails}
+        >
+          Update Details
+        </button>
       </div>
     </div>
   );

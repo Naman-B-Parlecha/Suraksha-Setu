@@ -28,7 +28,7 @@ const LoginModal = ({ onClose }) => {
         auth,
         "recaptcha-container",
         {
-          size: "normal",
+          size: "invisible",
           callback: (response) => {
             console.log("reCAPTCHA solved!");
             // reCAPTCHA solved, allow OTP to be sent
@@ -91,12 +91,12 @@ const LoginModal = ({ onClose }) => {
        const res = await axios.post("/api/user", {
         phone: phoneNumber,
        });
+       localStorage.setItem("phone",phoneNumber);
        router.push("/user");
        return res.data;
       },
       onSuccess: () => {
         console.log("User created successfully");
-        localStorage.setItem("user", JSON.stringify(res.data));
     },
     onError: () => {
       console.log("Error during user creation:", error);
