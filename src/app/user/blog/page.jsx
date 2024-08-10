@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
 const blogPosts = [
   {
@@ -59,10 +60,13 @@ const BlogPage = () => {
             className="relative flex flex-col overflow-hidden rounded-xl bg-white text-gray-700 shadow-md"
           >
             <div className="relative overflow-hidden bg-transparent rounded-t-xl">
-              <img
+              <Image
                 src={post.image}
                 alt={post.title}
                 className="w-full h-48 object-cover"
+                layout="responsive"
+                width={600}
+                height={300}
               />
             </div>
             <div className="flex flex-col flex-grow p-6">

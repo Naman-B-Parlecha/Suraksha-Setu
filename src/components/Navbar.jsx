@@ -28,29 +28,27 @@ const Navbar = () => {
       <div className="flex justify-between items-center gap-5">
         <div className="relative">
           <div
-            className={`flex gap-3 justify-between md:justify-normal items-center pt-8 ${
-              isSidebarCollapsed ? "px-5" : "px-8"
+            className={`flex gap-3 justify-between md:justify-normal items-center ${
+              isSidebarCollapsed ? "" : ""
             }`}
           >
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width={60}
-              height={60}
-              className="rounded-full"
-            />
-            <Link
-              href="/"
-              className={`${
-                isSidebarCollapsed ? "hidden" : "block"
-              } font-extrabold text-2xl`}
-            >
-              Suraksha Setu
+            <Link href="/">
+              <Image
+                src="/logo-color.png"
+                alt="logo"
+                width={200}
+                height={200}
+                className="rounded-full w-52 h-28 object-cover"
+              />
             </Link>
           </div>
         </div>
       </div>
-
+      <div className="bg-slate-100 rounded-lg p-2 md:hidden mr-5">
+        <Link href="/sos" className="font-bold ">
+          SOS
+        </Link>
+      </div>
       {/* RIGHT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <div className="hidden md:flex justify-between items-center gap-5">

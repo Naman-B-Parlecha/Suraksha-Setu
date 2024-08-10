@@ -26,14 +26,16 @@ const BlogPost = () => {
       </header>
 
       <div className="mb-4">
-        <img
+        <Image
           src={post.image}
           alt={post.title}
           width={736}
           height={414}
+          layout="responsive"
           className="rounded-lg shadow-lg"
         />
       </div>
+      
       <div className="flex flex-wrap gap-2 mb-6">
         {post.tags.map((tag, index) => (
           <span
