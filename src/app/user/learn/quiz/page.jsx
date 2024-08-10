@@ -7,33 +7,35 @@ export default function QuizSelectionPage() {
   const quizzes = [
     {
       title: "Tsunami Preparedness",
-      description: "Learn how to stay safe before, during, and after a tsunami.",
+      description:
+        "Learn how to stay safe before, during, and after a tsunami.",
       image: "/tsunami.jpg",
-      quizId: "tsunami"
+      quizId: "tsunami",
     },
     {
       title: "Flood Safety",
       description: "Understand the key precautions to take during a flood.",
       image: "/flood.jpg",
-      quizId: "flood"
+      quizId: "flood",
     },
     {
       title: "Earthquake Readiness",
       description: "Test your knowledge on earthquake preparedness.",
       image: "/earthquake.jpg",
-      quizId: "earthquake"
+      quizId: "earthquake",
     },
     {
       title: "Hurricane Awareness",
       description: "Prepare yourself for hurricane season with this quiz.",
       image: "/hurricane.jpg",
-      quizId: "hurricane"
+      quizId: "hurricane",
     },
     {
       title: "Wildfire Safety",
-      description: "Learn how to protect yourself and your home from wildfires.",
+      description:
+        "Learn how to protect yourself and your home from wildfires.",
       image: "/wildfire.jpg",
-      quizId: "wildfire"
+      quizId: "wildfire",
     },
   ];
 
@@ -41,7 +43,10 @@ export default function QuizSelectionPage() {
     <div className="flex w-full flex-row gap-4 flex-wrap">
       {quizzes.map((q, index) => {
         return (
-          <div key={index} className="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full max-w-[43rem] flex-row">
+          <div
+            key={index}
+            className="relative flex bg-clip-border rounded-xl bg-white text-gray-700 shadow-md w-full max-w-[43rem] flex-row"
+          >
             <div className="relative w-2/5 m-0 overflow-hidden text-gray-700 bg-white rounded-r-none bg-clip-border rounded-xl shrink-0">
               <Image
                 src={q.image}
@@ -60,7 +65,10 @@ export default function QuizSelectionPage() {
               <p className="block mb-8 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
                 {q.description}
               </p>
-              <Link href={`/user/learn/quiz/${q.quizId}`} className="inline-block">
+              <Link
+                href={`/user/learn/quiz/${q.quizId}`}
+                className="inline-block"
+              >
                 <button
                   className="flex items-center gap-2 px-6 py-3 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/10 active:bg-gray-900/20"
                   type="button"
