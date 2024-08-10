@@ -6,13 +6,14 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
-  const [username, setUsername] = React.useState(null);
-  const [phone, setPhone] = React.useState(null);
+  const [username, setUsername] = React.useState(localStorage.getItem("username"));
+  const [phone, setPhone] = React.useState(localStorage.getItem("phone"));
 
   React.useEffect(() => {
     const handleStorageChange = () => {
       const username = localStorage.getItem("username");
       const phone = localStorage.getItem("phone");
+      console.log(username, phone);
       setUsername(username);
       setPhone(phone);
     };
@@ -44,10 +45,10 @@ const Navbar = () => {
           <hr className="w-0 h-7 border border-solid border-l border-gray-300 mx-3" />
           <div className="flex items-center gap-3 cursor-pointer">
             <Image
-              src="https://s3-inventorymanagement.s3.us-east-2.amazonaws.com/profile.jpg"
+              src="https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"
               alt="Profile"
-              width={50}
-              height={50}
+              width={30}
+              height={30}
               className="rounded-full h-full object-cover"
             />
             <span className="font-semibold">{username??phone}</span>
