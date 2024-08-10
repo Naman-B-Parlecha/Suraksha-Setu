@@ -1,16 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CreatePostModal = ({ isOpen, onClose, onSave }) => {
   const [formData, setFormData] = useState({
     title: "",
-    description: "",
+    content: "",
     image: "",
     date: "",
     location: "",
     tags: "",
+    authorId: "", // Leave author empty initially
   });
+
+  useEffect(() => {
+    // Fetch uid from localStorage on the client side
+    const uid = typeof window !== "undefined" ? localStorage.getItem("uid") : "";
+    setFormData((prevData) => ({
+      ...prevData,
+      authorId: uid,
+    }));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

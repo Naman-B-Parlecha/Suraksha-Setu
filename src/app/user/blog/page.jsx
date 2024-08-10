@@ -21,37 +21,20 @@ const BlogPage = () => {
   }, []);
 
   const handleSavePost = async (newPost) => {
-    const response = await fetch("/api/posts", {
+    const response = await fetch("/api/blog", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newPost),
     });
-
+    console.log(response)
     if (response.ok) {
       const savedPost = await response.json();
       setPosts((prevPosts) => [...prevPosts, savedPost]);
     }
   };
-  // useEffect(() => {
-  //   if (posts.length === 0) {
-  //     return (
-  //       <div className="p-8 bg-gray-100 min-h-screen">
-  //         <div className="w-full flex justify-end mb-6">
-  //           <button
-  //             onClick={() => setIsModalOpen(true)}
-  //             className="px-4 py-2 bg-black text-white font-bold rounded-md text-xl hover:bg-black/80 transition-all duration-300 ease-in-out flex flex-nowrap gap-2 justify-center items-center"
-  //           >
-  //             <MdOutlineCreate />
-  //             <p>Write Experience</p>
-  //           </button>
-  //         </div>
-  //         <p>No post yet</p>
-  //       </div>
-  //     );
-  //   }
-  // }, []);
+
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <div className="w-full flex justify-end mb-6">
@@ -72,13 +55,13 @@ const BlogPage = () => {
               className="relative flex flex-col overflow-hidden rounded-xl bg-white text-gray-700 shadow-md"
             >
               <div className="relative overflow-hidden bg-transparent rounded-t-xl">
-                <Image
+                <img
                   src={post.image}
                   alt={post.title}
                   className="w-full h-48 object-cover"
-                  layout="responsive"
-                  width={600}
-                  height={300}
+                  // layout="responsive"
+                  // width={600}
+                  // height={300}
                 />
               </div>
               <div className="flex flex-col flex-grow p-6">

@@ -4,8 +4,11 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET({ params }) {
-  const { id } = params;
+export async function GET(req) {
+    // Extract the phone number from the URL slug  
+    const { pathname } = req.nextUrl; // Get the URL path  
+    const id = pathname.split('/').pop(); // Get the last segment of the URL  
+    console.log(id)
   try {
     const post = await prisma.blog.findUnique({
       where: { id },

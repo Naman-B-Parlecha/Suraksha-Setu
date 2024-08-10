@@ -1,19 +1,34 @@
-// pages/blog/[id].js
-
+"use client"
+import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
-const BlogPost = () => {
+const BlogPost = ({ params }) => {
   // Simulating data fetching for a specific blog post
-  const post = {
-    id: 2,
-    title: "The Impact of Natural Disasters on Communities",
-    description:
-      "A personal account of witnessing the devastating effects of natural disasters and the resilience of affected communities.",
-    image:
-      "https://i.pinimg.com/736x/c7/35/e5/c735e54ce94a36a8229a45b97e54187d.jpg",
-    date: "March 15",
-    location: "Puerto Rico",
-    tags: ["Disasters", "Community", "Resilience"],
+  const [post, setPost] = useState({
+    title: "",
+    description: "",
+    image: "",
+    date: "",
+    location: "",
+    tags: [],
+  });
+
+  useEffect(() => {
+    async function handleFetch() {
+      const response = await axios.get(`/api/blog/${params.blogId}`);
+      console.log(response.data);
+      setPost(response.data);
+    }
+    handleFetch();
+  }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -21,21 +36,20 @@ const BlogPost = () => {
       <header className="text-center mb-8">
         <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
         <p className="text-gray-600 text-xl">
-          {post.date} | {post.location}
+          {formatDate(post.updatedAt)} | {post.location}
         </p>
       </header>
 
       <div className="mb-4">
-        <Image
+        <img
           src={post.image}
           alt={post.title}
           width={736}
           height={414}
-          layout="responsive"
           className="rounded-lg shadow-lg"
         />
       </div>
-      
+
       <div className="flex flex-wrap gap-2 mb-6">
         {post.tags.map((tag, index) => (
           <span

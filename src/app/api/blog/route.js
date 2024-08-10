@@ -21,6 +21,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   const data = await request.json();
+  console.log(data)
   try {
     const newPost = await prisma.blog.create({
       data: {
@@ -32,6 +33,7 @@ export async function POST(request) {
         image: data.image
       },
     });
+    console.log("here")
     return new Response(JSON.stringify(newPost), {
       status: 201,
       headers: { 'Content-Type': 'application/json' },
