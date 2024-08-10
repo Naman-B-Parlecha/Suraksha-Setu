@@ -50,7 +50,11 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
+      <div className="bg-slate-100 rounded-lg p-2 md:hidden mr-5">
+        <Link href="/sos" className="font-bold ">
+          SOS
+        </Link>
+      </div>
       {/* RIGHT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <div className="hidden md:flex justify-between items-center gap-5">
