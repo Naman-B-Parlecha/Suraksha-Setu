@@ -4,13 +4,17 @@ import { Layout, LucideIcon, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 const SidebarLink = ({ href, icon: Icon, label, isCollapsed }) => {
   const pathname = usePathname();
   const isActive =
     pathname === href || (pathname === "/" && href === "/dashboard");
-
+    useEffect(()=>{
+      if (!localStorage.getItem("phone")) {
+        window.location.href = "/";
+      }
+    })
   return (
     <Link href={href}>
       <div

@@ -2,17 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
+import { checkDomain } from "../../../domain/domain";
 
 const Sos = () => {
   const [location, setLocation] = useState(null);
   const [message, setMessage] = useState("");
   const queryClient = useQueryClient();
 
-  const baseUrl =
-          process.env.NODE_ENV === "development"
-            ? "http://localhost:3000"
-            : "https://no-idea-seven.vercel.app";
-
+  const domain = checkDomain();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +25,7 @@ const Sos = () => {
 
   const { mutate: sendSOS } = useMutation({
     mutationFn: async (message) => {
-      const response = await axios.post(`${baseUrl}/api/sos/`, message);
+      const response = await axios.post(`${domain}/api/sos`, message);
 
       queryClient.refetchQueries({
         queryKey: ["fetchsos"],
