@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { Bell } from "lucide-react";
 import { useRouter } from "next/navigation";
 import LoginModal from "./Login";
+import Link from "next/link";
 
 const Navbar = () => {
   const [isLoggin, setIsLoggin] = useState(false);
@@ -15,16 +16,14 @@ const Navbar = () => {
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const router = useRouter();
-  
+
   const handleLogin = () => {
-    setOpenModal(prev=>!prev);
+    setOpenModal((prev) => !prev);
   };
 
   return (
     <div className="flex justify-between items-center w-full mb-7">
-      {
-        openModal && <LoginModal onClose={handleLogin}/>
-      }
+      {openModal && <LoginModal onClose={handleLogin} />}
       {/* LEFT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <div className="relative">
@@ -40,13 +39,14 @@ const Navbar = () => {
               height={60}
               className="rounded-full"
             />
-            <h1
+            <Link
+              href="/"
               className={`${
                 isSidebarCollapsed ? "hidden" : "block"
               } font-extrabold text-2xl`}
             >
               Suraksha Setu
-            </h1>
+            </Link>
           </div>
         </div>
       </div>
@@ -54,6 +54,11 @@ const Navbar = () => {
       {/* RIGHT SIDE */}
       <div className="flex justify-between items-center gap-5">
         <div className="hidden md:flex justify-between items-center gap-5">
+          <div className="bg-slate-100 rounded-lg p-2">
+            <Link href="/sos" className="font-bold ">
+              SOS
+            </Link>
+          </div>
           <div className="relative">
             <input
               type="search"
