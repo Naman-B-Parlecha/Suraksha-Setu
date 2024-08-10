@@ -8,8 +8,12 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
-  const isSidebarCollapsed = false;
-  const isLoggin = false;
+  const [isLoggin, setIsLoggin] = React.useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState
+
+  const handleLogin = () => {
+    
+  };
   return (
     <div className="flex justify-between items-center w-full mb-7">
       {/* LEFT SIDE */}
@@ -59,17 +63,17 @@ const Navbar = () => {
             )}
           </div>
         </div>
-        <Link href="/login">
+        <button onClick={() => handleLogin()}>
           {isLoggin ? (
-            <>
-              <RiLogoutCircleLine size={30} />
-            </>
+            <div className="font-bold flex items-center space-x-4 text-lg">
+              Logout {"  "} <RiLogoutCircleLine size={30} />
+            </div>
           ) : (
             <div className="font-bold flex items-center space-x-4 text-lg">
-            Login {"  "} <IoMdLogIn size={30} />
+              Login {"  "} <IoMdLogIn size={30} />
             </div>
           )}
-        </Link>
+        </button>
       </div>
     </div>
   );
