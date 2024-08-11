@@ -2,6 +2,7 @@
 
 import {
   BookOpenText,
+  HeartHandshake,
   Layout,
   LogOut,
   LucideIcon,
@@ -98,6 +99,12 @@ const Sidebar = () => {
           href="/user/news"
           icon={SquareLibrary}
           label="News"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/user/support"
+          icon={HeartHandshake}
+          label="Grievance"
           isCollapsed={isSidebarCollapsed}
         />
         <SidebarLink
