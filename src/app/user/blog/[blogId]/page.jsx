@@ -21,7 +21,7 @@ const BlogPost = ({ params }) => {
       setPost(response.data);
     }
     handleFetch();
-  }, []);
+  }, [params.blogId]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -41,7 +41,7 @@ const BlogPost = ({ params }) => {
       </header>
 
       <div className="mb-4">
-        <img
+        <Image
           src={post.image}
           alt={post.title}
           width={736}

@@ -152,7 +152,7 @@ export default function Disaster({ params }) {
         <div className="fixed inset-0 bg-gray-800 bg-opacity-30 flex items-center justify-center">
           <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">
             <h2 className="text-2xl font-bold mb-4">Congratulations!</h2>
-            <p className="mb-4">You've completed all the steps for the {disaster.name} tutorial.</p>
+            <p className="mb-4">You&apos;ve completed all the steps for the {disaster.name} tutorial.</p>
             <button
               onClick={handleCloseModal}
               className="bg-blue-500 text-white px-4 py-2 rounded"
