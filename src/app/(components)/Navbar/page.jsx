@@ -6,8 +6,9 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
-  const [username, setUsername] = React.useState(localStorage.getItem("username"));
-  const [phone, setPhone] = React.useState(localStorage.getItem("phone"));
+
+  const [username, setUsername] = React.useState("");
+  const [phone, setPhone] = React.useState("");
 
   React.useEffect(() => {
     const handleStorageChange = () => {
