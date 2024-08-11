@@ -22,7 +22,7 @@ const NewsModal = ({ article }) => {
   const randomImage = images[Math.floor(Math.random() * images.length)];
 
   return (
-    <div className="max-w-2xl w-full lg:flex relative ">
+    <div className="w-full h-52 lg:flex relative ">
       <a href={url} target="_blank" rel="noreferrer">
         <button className="p-1 border-2 rounded-full absolute top-2 right-2">
           <MoveUpRight size={15}/>
