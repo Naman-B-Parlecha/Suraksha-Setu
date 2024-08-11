@@ -5,23 +5,25 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const Page = () => {
-  const uid = localStorage.getItem("uid");
+  
   const [res,setRes] = useState(null);
 
   const getSupport = async () => {
+    const uid = await localStorage.getItem("uid");
     const res = await axios.get(`/api/support/${uid}`);
     console.log("data", res.data);
     setRes(res.data);
   };
 
   useEffect(() => {
+    const uid = localStorage.getItem("uid");
     axios.get(`/api/support/${uid}`).then((res) => {
       console.log(res.data);
       setRes(res.data);
     }).catch((err) => {
       console.log(err);
     });
-  }, [uid]);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
