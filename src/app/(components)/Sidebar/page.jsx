@@ -3,6 +3,7 @@
 import {
   BookOpenText,
   Layout,
+  LogOut,
   LucideIcon,
   SlidersHorizontal,
   View,
@@ -52,7 +53,12 @@ const Sidebar = () => {
   const sidebarClassNames = `fixed flex flex-col ${
     isSidebarCollapsed ? "w-0 md:w-16" : "w-72 md:w-64"
   } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
-
+  
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+  
   return (
     <div className={sidebarClassNames}>
       {/* TOP LOGO */}
@@ -99,6 +105,14 @@ const Sidebar = () => {
           label="Settings"
           isCollapsed={isSidebarCollapsed}
         />
+        <button className="w-full" onClick={handleLogout}>
+        <SidebarLink
+          href="/"
+          icon={LogOut}
+          label="Logout"
+          isCollapsed={isSidebarCollapsed}
+        />
+        </button>
       </div>
 
       {/* FOOTER */}

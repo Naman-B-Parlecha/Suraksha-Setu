@@ -22,6 +22,7 @@ const useCreateUserMutation = (phoneNumber, onSuccessCallback) => {
     onSuccess: (data) => {
       console.log("User created successfully", data);
       localStorage.setItem("uid", data.id);
+      localStorage.setItem("username", data.name);
       localStorage.setItem("phone", phoneNumber);
       if (onSuccessCallback) onSuccessCallback();
     },

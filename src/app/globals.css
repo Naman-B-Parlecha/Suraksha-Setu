@@ -29,3 +29,19 @@ body,
     grid-template-rows: repeat(8, 7.5vh);
   }
 }
+  
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 8px;
+  background-color: #d2d0ce;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+  background-color: #050505;
+}
