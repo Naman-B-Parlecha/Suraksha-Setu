@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/app/(components)/Header/page";
+import Header from "../../(components)/Header/page.jsx"
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 

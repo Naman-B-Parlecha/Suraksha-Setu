@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
-import { DBConnect } from "@/libs/DBConnect";
+import { DBConnect } from "../../../libs/DBConnect";
 import nodemailer from "nodemailer";
 
 const prisma = new PrismaClient();
@@ -8,6 +8,8 @@ const prisma = new PrismaClient();
 export async function POST(req) {
   const data = await req.json();
   const { message, latitude, longitude } = data;
+
+  console.log("Data:", data);
 
   try {
     await DBConnect();

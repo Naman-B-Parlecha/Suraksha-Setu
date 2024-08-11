@@ -1,10 +1,10 @@
 "use client";
 
-import NewsModal from "@/components/NewsModal";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import TableauViz from "@/analytics/Tableau";
 import useFcmToken from "@/hook/useFcmToken";
+import NewsModal from "../components/NewsModal"
 
 const Page = () => {
   const { token, notificationPermissionStatus } = useFcmToken();
@@ -42,7 +42,6 @@ const Page = () => {
   return (
     <div className="flex h-full">
       <div className="w-1/2">
-      <TableauViz />
       </div>
       <div className="w-1/2">
         <h1 className="text-2xl font-bold">Recent News</h1>

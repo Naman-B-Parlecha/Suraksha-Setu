@@ -34,8 +34,12 @@ const Navbar = () => {
 
       {/* RIGHT SIDE */}
       <div className="flex justify-between items-center gap-5">
+      <div className="bg-red-500 rounded-lg p-2 mr-5">
+        <Link href="/sos" className="font-extrabold text-white">
+          SOS
+        </Link>
+      </div>
         <div className="hidden md:flex justify-between items-center gap-5">
-          <div></div>
           <div className="relative">
             <Bell className="cursor-pointer text-gray-500" size={24} />
             <span className="absolute -top-2 -right-2 inline-flex items-center justify-center px-[0.4rem] py-1 text-xs font-semibold leading-none text-red-100 bg-red-400 rounded-full">
@@ -52,6 +56,7 @@ const Navbar = () => {
               className="rounded-full h-full object-cover"
             />
             <span className="font-semibold">{username??phone}</span>
+            
           </div>
         </div>
         <Link href="/user/setting">

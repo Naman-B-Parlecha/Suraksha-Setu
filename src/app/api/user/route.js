@@ -1,4 +1,4 @@
-import { DBConnect } from "@/libs/DBConnect";
+import { DBConnect } from "../../../libs/DBConnect";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
