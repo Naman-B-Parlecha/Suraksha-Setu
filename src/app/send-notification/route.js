@@ -1,9 +1,9 @@
 import admin from "firebase-admin";
-
+import { serviceKey } from "../../../service_key.js";
 
 // Initialize Firebase Admin SDK
 if (!admin.apps.length) {
-  const serviceAccount = require("@/service_key.json");
+  const serviceAccount = serviceKey;
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
   });
