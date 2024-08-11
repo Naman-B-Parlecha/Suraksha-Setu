@@ -2,10 +2,32 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import TableauViz from "@/analytics/Tableau";
+import useFcmToken from "@/hook/useFcmToken";
 import NewsModal from "../components/NewsModal"
 
 const Page = () => {
+  const { token, notificationPermissionStatus } = useFcmToken();
   const [data,setData] = useState([]);
+
+  const handleTestNotification = async () => {
+    const response = await fetch("/send-notification", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+        title: "Test Notification",
+        message: "This is a test notification",
+        link: "/user",
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  };
+
 
   const getNews = async () => {
     const res = await axios.get("https://newsapi.org/v2/everything?q=disaster&apiKey=b7a0ce9a02ba46a389e03d60e25fbe6a");

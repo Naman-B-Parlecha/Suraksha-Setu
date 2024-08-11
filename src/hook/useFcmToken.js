@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { getToken, onMessage, Unsubscribe } from "firebase/messaging";
-import { fetchToken, messaging } from "@/firebase";
+import { fetchToken, messaging } from "../../firebase";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+
 
 async function getNotificationPermissionAndToken() {
   // Step 1: Check if Notifications are supported in the browser.
@@ -33,8 +33,8 @@ async function getNotificationPermissionAndToken() {
 const useFcmToken = () => {
   const router = useRouter(); // Initialize the router for navigation.
   const [notificationPermissionStatus, setNotificationPermissionStatus] =
-    useState<NotificationPermission | null>(null); // State to store the notification permission status.
-  const [token, setToken] = useState<string | null>(null); // State to store the FCM token.
+    useState(null); // State to store the notification permission status.
+  const [token, setToken] = useState(null); // State to store the FCM token.
   const retryLoadToken = useRef(0); // Ref to keep track of retry attempts.
   const isLoading = useRef(false); // Ref to keep track if a token fetch is currently in progress.
 
@@ -161,7 +161,7 @@ const useFcmToken = () => {
 
     // Step 11: Cleanup the listener when the component unmounts.
     return () => unsubscribe?.();
-  }, [token, router, toast]);
+  }, [token, router]);
 
   return { token, notificationPermissionStatus }; // Return the token and permission status.
 };
