@@ -1,4 +1,3 @@
-"use client";
 import TableauVizStory from "../../../analytics/Tableau.jsx";
 
 const Dashboard = () => {
