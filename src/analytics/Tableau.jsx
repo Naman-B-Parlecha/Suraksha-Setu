@@ -1,4 +1,5 @@
 "use client"
+import Image from 'next/image';
 import React, { useEffect } from 'react';
 
 const TableauVizStory = () => {
@@ -18,10 +19,12 @@ const TableauVizStory = () => {
     <div className='tableauPlaceholder' id='viz1723338695498' style={{ position: 'relative' }}>
       <noscript>
         <a href='#'>
-          <img
+          <Image
             alt='Story 1'
             src='https://public.tableau.com/static/images/PY/PYDS59SMD/1_rss.png'
             style={{ border: 'none' }}
+            width={1250}
+            height={947}
           />
         </a>
       </noscript>

@@ -21,7 +21,7 @@ const BlogPost = ({ params }) => {
       setPost(response.data);
     }
     handleFetch();
-  }, []);
+  }, [params.blogId]);
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
