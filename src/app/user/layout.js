@@ -1,6 +1,6 @@
 import { Quicksand } from "next/font/google";
 import "../globals.css";
-import TanStackQuery, { TanStackQueryDevTools } from "@/tanstack/TanstackQuery";
+import TanStackQuery, { TanStackQueryDevTools } from "../../tanstack/TanstackQuery.jsx";
 import DashboardWrapper from "../dashboardWrapper";
 
 const inter = Quicksand({ subsets: ["latin"] });

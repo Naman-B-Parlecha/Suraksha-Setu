@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { MdOutlineCreate } from "react-icons/md";
-import CreatePostModal from "@/components/Modal";
+import CreatePostModal from "../../../components/Modal"
 
 const BlogPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
