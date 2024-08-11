@@ -6,6 +6,7 @@ import {
   LogOut,
   LucideIcon,
   SlidersHorizontal,
+  SquareLibrary,
   View,
 } from "lucide-react";
 import Image from "next/image";
@@ -91,6 +92,12 @@ const Sidebar = () => {
           href="/user/learn"
           icon={BookOpenText}
           label="Learn"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/user/news"
+          icon={SquareLibrary}
+          label="News"
           isCollapsed={isSidebarCollapsed}
         />
         <SidebarLink

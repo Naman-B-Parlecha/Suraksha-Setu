@@ -35,7 +35,7 @@ const NewsModal = ({ article }) => {
         }}
         title="Woman holding a mug"
       ></div>
-      <div className="border-r rounded-xl border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white lg:rounded-l p-4 flex flex-col justify-between leading-normal">
+      <div className="border-r w-full rounded-xl border-b border-l border-grey-light lg:border-l-0 lg:border-t lg:border-grey-light bg-white lg:rounded-l p-4 flex flex-col justify-between leading-normal">
         <div className="mb-8">
           <div className="text-black font-bold text-xl mb-2">{title}</div>
           <p className="text-grey-darker text-base">{description}</p>
