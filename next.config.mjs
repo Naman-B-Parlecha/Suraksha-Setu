@@ -6,6 +6,7 @@ const nextConfig = {
       "via.placeholder.com",
       "images.unsplash.com",
       "i.pinimg.com",
+      "static-00.iconduck.com",
     ],
   },
 };

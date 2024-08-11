@@ -7,11 +7,11 @@ import {
   floodPrecautionQuiz,
   hurricanePrecautionQuiz,
   wildfirePrecautionQuiz,
-} from "@/lib/questions";
+} from "../../../../../lib/questions"
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
-import { useWindowSize } from "@/hook/useWindowSize"; // Custom hook for window size
+import { useWindowSize } from "../../../../../hook/useWindowSize"
 
 export default function QuizPage({ params }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);

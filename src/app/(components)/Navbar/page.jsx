@@ -6,13 +6,14 @@ import Link from "next/link";
 import React from "react";
 
 const Navbar = () => {
-  const [username, setUsername] = React.useState(null);
-  const [phone, setPhone] = React.useState(null);
+  const [username, setUsername] = React.useState(localStorage.getItem("username"));
+  const [phone, setPhone] = React.useState(localStorage.getItem("phone"));
 
   React.useEffect(() => {
     const handleStorageChange = () => {
       const username = localStorage.getItem("username");
       const phone = localStorage.getItem("phone");
+      console.log(username, phone);
       setUsername(username);
       setPhone(phone);
     };
@@ -33,8 +34,12 @@ const Navbar = () => {
 
       {/* RIGHT SIDE */}
       <div className="flex justify-between items-center gap-5">
+      <div className="bg-red-500 rounded-lg p-2 mr-5">
+        <Link href="/sos" className="font-extrabold text-white">
+          SOS
+        </Link>
+      </div>
         <div className="hidden md:flex justify-between items-center gap-5">
-          <div></div>
           <div className="relative">
             <Bell className="cursor-pointer text-gray-500" size={24} />
             <span className="absolute -top-2 -right-2 inline-flex items-center justify-center px-[0.4rem] py-1 text-xs font-semibold leading-none text-red-100 bg-red-400 rounded-full">
@@ -44,16 +49,17 @@ const Navbar = () => {
           <hr className="w-0 h-7 border border-solid border-l border-gray-300 mx-3" />
           <div className="flex items-center gap-3 cursor-pointer">
             <Image
-              src="https://s3-inventorymanagement.s3.us-east-2.amazonaws.com/profile.jpg"
+              src="https://static-00.iconduck.com/assets.00/profile-default-icon-2048x2045-u3j7s5nj.png"
               alt="Profile"
-              width={50}
-              height={50}
+              width={30}
+              height={30}
               className="rounded-full h-full object-cover"
             />
             <span className="font-semibold">{username??phone}</span>
+            
           </div>
         </div>
-        <Link href="/settings">
+        <Link href="/user/setting">
           <Settings className="cursor-pointer text-gray-500" size={24} />
         </Link>
       </div>

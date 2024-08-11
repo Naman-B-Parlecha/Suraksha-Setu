@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/app/(components)/Header/page";
+import Header from "../../(components)/Header/page.jsx"
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
@@ -62,7 +62,7 @@ const Settings = () => {
 
   return (
     <div className="w-full">
-      <Header name="User Settings" />
+      <Header/>
       <div className="overflow-x-auto mt-5 shadow-md">
         <table className="min-w-full bg-white rounded-lg">
           <thead className="bg-gray-800 text-white">

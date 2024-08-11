@@ -1,6 +1,14 @@
 "use client";
 
-import { BookOpenText, Layout, LucideIcon, SlidersHorizontal, View } from "lucide-react";
+import {
+  BookOpenText,
+  Layout,
+  LogOut,
+  LucideIcon,
+  SlidersHorizontal,
+  SquareLibrary,
+  View,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -10,11 +18,11 @@ const SidebarLink = ({ href, icon: Icon, label, isCollapsed }) => {
   const pathname = usePathname();
   const isActive =
     pathname === href || (pathname === "/" && href === "/dashboard");
-    useEffect(()=>{
-      if (!localStorage.getItem("phone")) {
-        window.location.href = "/";
-      }
-    })
+  useEffect(() => {
+    if (!localStorage.getItem("phone")) {
+      window.location.href = "/";
+    }
+  });
   return (
     <Link href={href}>
       <div
@@ -46,7 +54,12 @@ const Sidebar = () => {
   const sidebarClassNames = `fixed flex flex-col ${
     isSidebarCollapsed ? "w-0 md:w-16" : "w-72 md:w-64"
   } bg-white transition-all duration-300 overflow-hidden h-full shadow-md z-40`;
-
+  
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/";
+  };
+  
   return (
     <div className={sidebarClassNames}>
       {/* TOP LOGO */}
@@ -55,20 +68,16 @@ const Sidebar = () => {
           isSidebarCollapsed ? "px-5" : "px-8"
         }`}
       >
-        <Image
-          src="/logo.png"
-          alt="logo"
-          width={60}
-          height={60}
-          className="rounded-full"  
-        />
-        <h1
-          className={`${
-            isSidebarCollapsed ? "hidden" : "block"
-          } font-extrabold text-sm`}
-        >
-          Suraksha Setu
-        </h1>
+        <Link href="/user/dashboard">
+          <Image
+            src="/logo-color.png"
+            alt="logo"
+            width={200}
+            height={200}
+            className="rounded-full w-52 h-28 object-cover"
+          />
+        </Link>
+       
       </div>
 
       {/* LINKS */}
@@ -86,6 +95,12 @@ const Sidebar = () => {
           isCollapsed={isSidebarCollapsed}
         />
         <SidebarLink
+          href="/user/news"
+          icon={SquareLibrary}
+          label="News"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
           href="/user/blog"
           icon={View}
           label="Blog"
@@ -97,6 +112,14 @@ const Sidebar = () => {
           label="Settings"
           isCollapsed={isSidebarCollapsed}
         />
+        <button className="w-full" onClick={handleLogout}>
+        <SidebarLink
+          href="/"
+          icon={LogOut}
+          label="Logout"
+          isCollapsed={isSidebarCollapsed}
+        />
+        </button>
       </div>
 
       {/* FOOTER */}

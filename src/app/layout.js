@@ -1,7 +1,7 @@
 import { Inter, Quicksand } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import TanStackQuery, { TanStackQueryDevTools } from "@/tanstack/TanstackQuery";
+import Navbar from "../components/Navbar.jsx"
+import TanStackQuery, { TanStackQueryDevTools } from "../tanstack/TanstackQuery.jsx"
 
 const quicksand = Quicksand({ subsets: ["latin"] });
 
