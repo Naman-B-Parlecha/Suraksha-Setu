@@ -41,7 +41,7 @@ const BlogPost = ({ params }) => {
       </header>
 
       <div className="mb-4">
-        <img
+        <Image
           src={post.image}
           alt={post.title}
           width={736}

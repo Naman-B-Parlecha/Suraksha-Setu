@@ -38,7 +38,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="w-full h-fit flex flex-col items-center p-4 gap-4 mb-8">
+      <div className="w-full h-fit flex flex-col items-center p-4 px-40 gap-4 mb-8">
         <h1 className="text-center w-full leading-tight text-3xl line md:text-5xl font-bold md:w-2/3 mb-2">
           Features that <span className="text-red-500">empower</span> your{" "}
           <span className="text-red-500">disaster management efforts.</span>{" "}
@@ -89,7 +89,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="w-full flex flex-col items-center p-4">
+      <div className="w-full flex flex-col items-center p-4 px-40">
         <h1 className="text-center w-full leading-tight text-3xl line md:text-5xl font-bold md:w-2/3 mb-2">
           <span className="text-red-500">Innovative</span> Technology to{" "}
           <span className="text-red-500">Enhance Disaster Management.</span>
