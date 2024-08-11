@@ -1,7 +1,9 @@
 import React from "react";
 
-const page = ({ name }) => {
-  return <h1 className="text-2xl font-semibold text-gray-700">{name}</h1>;
+const Header = () => {
+  return (
+    <h1 className="text-2xl font-semibold text-gray-700">User Settings</h1>
+  );
 };
 
-export default page;
+export default Header;
