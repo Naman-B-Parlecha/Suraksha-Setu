@@ -61,7 +61,7 @@ const BlogPost = ({ params }) => {
         ))}
       </div>
 
-      <p className="text-lg leading-relaxed">{post.description}</p>
+      <p className="text-lg leading-relaxed">{post.content}</p>
     </div>
   );
 };

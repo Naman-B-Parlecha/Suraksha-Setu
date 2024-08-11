@@ -28,11 +28,18 @@ const BlogPage = () => {
       },
       body: JSON.stringify(newPost),
     });
-    console.log(response)
+    console.log(response);
     if (response.ok) {
       const savedPost = await response.json();
       setPosts((prevPosts) => [...prevPosts, savedPost]);
     }
+  };
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -68,7 +75,9 @@ const BlogPage = () => {
                 <h4 className="text-2xl font-semibold text-blue-gray-900">
                   {post.title}
                 </h4>
-                <p className="mt-3 text-xl text-gray-700">{post.description}</p>
+                <p className="mt-3 text-xl text-gray-700">
+                  {post.content.slice(0, 50)}...
+                </p>
                 <div className="mt-4">
                   <p className="text-sm font-semibold text-gray-600">
                     {post.location}
@@ -85,7 +94,9 @@ const BlogPage = () => {
                   </div>
                 </div>
                 <div className="flex items-center justify-end mt-auto p-6">
-                  <p className="text-base text-gray-600">{post.date}</p>
+                  <p className="text-base text-gray-600">
+                    {formatDate(post.updatedAt)}
+                  </p>
                 </div>
               </div>
             </Link>

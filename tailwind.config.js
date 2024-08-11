@@ -13,7 +13,17 @@ module.exports = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       transitionProperty: {
-        'background-color': 'background-color',
+        "background-color": "background-color",
+      },
+      animation: {
+        "pulse-fast": "pulse 1s ease-in-out infinite",
+      },
+      keyframes: {
+        pulse: {
+          "0%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.05)" },
+          "100%": { transform: "scale(1)" },
+        },
       },
     },
   },
