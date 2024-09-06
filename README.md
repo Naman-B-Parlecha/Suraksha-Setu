@@ -17,7 +17,7 @@
 
 ### **Demo**
 
-[Watch the video](https://res.cloudinary.com/dmvelqjem/video/upload/v1694078440/96d0c74e823200084644abe4e48c0051.mp4)
+[Watch the video](https://asset.cloudinary.com/dmvelqjem/96d0c74e823200084644abe4e48c0051)
 
 [Live Demo](https://suraksha-setuu.vercel.app/)
 
