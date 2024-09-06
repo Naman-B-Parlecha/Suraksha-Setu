@@ -17,10 +17,7 @@
 
 ### **Demo**
 
-<video width="640" height="360" controls>
-  <source src="https://asset.cloudinary.com/dmvelqjem/96d0c74e823200084644abe4e48c0051" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Watch the video](https://res.cloudinary.com/dmvelqjem/video/upload/v1694078440/96d0c74e823200084644abe4e48c0051.mp4)
 
 [Live Demo](https://suraksha-setuu.vercel.app/)
 
