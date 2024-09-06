@@ -17,7 +17,7 @@
 
 ### **Demo**
 
-[Live Demo]([https://dayanand.vercel.app/](https://suraksha-setuu.vercel.app/))
+[Live Demo]([https://suraksha-setuu.vercel.app/])
 
 ---
 
